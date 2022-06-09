@@ -1,0 +1,67 @@
+﻿<Window x:Class="Lokalni_iskalni_algoritmi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lokalni_iskalni_algoritmi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="666" Width="1176">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <RadioButton x:Name="Hillclm" Content="Hill climbing" HorizontalAlignment="Left" Margin="10,276,0,0" VerticalAlignment="Top" Height="18" Width="90" Checked="Hillclm_Checked"/>
+        <RadioButton x:Name="Simanneal" Content="Simulated annealing" HorizontalAlignment="Left" Margin="100,276,0,0" VerticalAlignment="Top" Height="18" Width="129" Checked="Simanneal_Checked"/>
+        <RadioButton x:Name="LBS" Content="Local beam search" HorizontalAlignment="Left" Margin="229,276,0,0" VerticalAlignment="Top" Height="18" Width="120" Checked="LBS_Checked"/>
+        <RadioButton x:Name="Genal" Content="Genetic algorithm" HorizontalAlignment="Left" Margin="349,276,0,0" VerticalAlignment="Top" Height="18" Width="116" Checked="Genal_Checked"/>
+        <Label Content="Izbira algoritma:" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="34" Width="150" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Parametri algoritma:" HorizontalAlignment="Left" Margin="10,294,0,0" VerticalAlignment="Top" Height="34" Width="169" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Podatki o stanju:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="34" Width="150" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Dimenzije šahovnice: " HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29"/>
+        <Label Content="Hevristika:" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29"/>
+        <Label Content="Število korakov: " HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29"/>
+        <Button Content="Generiraj začetno stanje" HorizontalAlignment="Left" Margin="119,136,0,0" VerticalAlignment="Top" Width="164" Height="26" FontSize="14" Click="Button_Click_1"/>
+        <Button Content="Zaženi algoritem" HorizontalAlignment="Left" Margin="119,167,0,0" VerticalAlignment="Top" Width="164" Height="26" FontSize="14" Click="Button_Click"/>
+        <ComboBox Name="chesssize" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="154,49,0,0" VerticalAlignment="Top" Width="129" SelectionChanged="ComboBox_SelectionChanged" Height="24">
+            <ComboBoxItem Content="4x4"/>
+            <ComboBoxItem Content="5x5"/>
+            <ComboBoxItem Content="6x6"/>
+            <ComboBoxItem Content="7x7"/>
+            <ComboBoxItem Content="8x8"/>
+            <ComboBoxItem Content="9x9"/>
+            <ComboBoxItem Content="10x10"/>
+            <ComboBoxItem Content="11x11"/>
+            <ComboBoxItem Content="12x12"/>
+        </ComboBox>
+        <Label x:Name="IzpHevr" Content="0" HorizontalAlignment="Left" Margin="154,73,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Height="29"/>
+        <Label x:Name="StkorakovUI" Content="0" HorizontalAlignment="Left" Margin="154,102,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Height="29"/>
+
+        <UniformGrid Name="ChessBoard" HorizontalAlignment="Left" Height="600" Margin="542,10,0,0" VerticalAlignment="Top" Width="600">
+        </UniformGrid>
+        <Grid x:Name="bordergrid" HorizontalAlignment="Left" Height="600" Margin="542,10,0,0" VerticalAlignment="Top" Width="600">
+            <Border BorderBrush="DimGray" BorderThickness="2" />
+        
+        </Grid>
+        <Label x:Name="HillclmLBL" Content="Število pomikov v enakovredna sosednja stanja:" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="309" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="EnakPomik" HorizontalAlignment="Left" Height="29" Margin="319,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="SimannealLBL1" Content="Začetna temperatura:" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="ZacTmp" HorizontalAlignment="Left" Height="29" Margin="154,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="SimannealLBL2" Content="Sprememba temperature:" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="169" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="SprTemp" HorizontalAlignment="Left" Height="29" Margin="179,362,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="LBSLBL1" Content="Število stanj:" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="StStanj" HorizontalAlignment="Left" Height="29" Margin="100,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="LBSLBL2" Content="Maksimalno število iteracij:" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="182" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="StIterac" HorizontalAlignment="Left" Height="29" Margin="192,362,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="GenalLBL1" Content="Velikost populacije:" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="VelPop" HorizontalAlignment="Left" Height="29" Margin="140,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="GenalLBL2" Content="Velikost Elite:" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="125" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="Elita" HorizontalAlignment="Left" Height="29" Margin="109,362,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="GenalLBL3" Content="Verjetnost križanja%:" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="140" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="Krizanje" HorizontalAlignment="Left" Height="29" Margin="158,391,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="GenalLBL4" Content="Verjetnost mutacije%:" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="144" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="Mutacije" HorizontalAlignment="Left" Height="29" Margin="158,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+        <Label x:Name="GenalLBL5" Content="Število generacij:" HorizontalAlignment="Left" Margin="10,449,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Height="29" Visibility="Collapsed"/>
+        <TextBox x:Name="Generacije" HorizontalAlignment="Left" Height="29" Margin="130,449,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Visibility="Collapsed"/>
+    </Grid>
+</Window>
